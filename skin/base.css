@@ -913,3 +913,22 @@
 #tabbrowser-tabs[opentabstop] #filler-tab {
   -moz-box-ordinal-group: 0;
 }
+
+/* Display on the right side */
+#main-window[showtabsright] #verticaltabs-box {
+  left: unset;
+  right: 0;
+}
+
+/* Here we just inverse the margins, repositioning happens in verticaltab.js
+   since we need to move it in the DOM anyway (i think) */
+#main-window[showtabsright] #verticaltabs-splitter {
+  margin-right: calc(var(--pinned-width) - 3px) !important;
+  margin-left: -1px !important;
+}
+
+#main-window[showtabsright] #sidebar-box,
+#main-window[showtabsright] #sidebar-box[hidden="true"] ~ #appcontent {
+  margin-left: auto;
+  margin-right: var(--collapsed-width);
+}

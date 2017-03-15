@@ -647,7 +647,11 @@ VerticalTabs.prototype = {
     }
 
     browserbox.insertBefore(leftbox, contentbox);
-    browserbox.insertBefore(splitter, browserbox.firstChild);
+    if (!!prefs.showtabsright) {
+      browserbox.insertBefore(splitter, browserbox.lastChild);
+    } else {
+      browserbox.insertBefore(splitter, browserbox.firstChild);
+    }
 
     this.pinnedWidth = +mainWindow.getAttribute('tabspinnedwidth').replace('px', '') ||
                        +window.getComputedStyle(document.documentElement)
