@@ -179,6 +179,13 @@
       "value": false
     },
     {
+      "name": "showtabsright",
+      "title": "Display right",
+      "description": "By default TabCenter is displayed on the left side, enable this to display it on the right.",
+      "type": "bool",
+      "value": false
+    },
+    {
       "name": "largetabs",
       "hidden": true,
       "title": "Large Tabs",
