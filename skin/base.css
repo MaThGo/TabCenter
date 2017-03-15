@@ -922,13 +922,15 @@
 
 /* Here we just inverse the margins, repositioning happens in verticaltab.js
    since we need to move it in the DOM anyway (i think) */
-#main-window[showtabsright] #verticaltabs-splitter {
+#main-window[showtabsright="true"] #verticaltabs-splitter {
   margin-right: calc(var(--pinned-width) - 3px) !important;
   margin-left: -1px !important;
 }
 
-#main-window[showtabsright] #sidebar-box,
-#main-window[showtabsright] #sidebar-box[hidden="true"] ~ #appcontent {
-  margin-left: auto;
+#main-window[tabspinned="false"][showtabsright="true"] #appcontent {
   margin-right: var(--collapsed-width);
+}
+
+#main-window[showtabsright="true"] #verticaltabs-box ~ #appcontent {
+  margin-left: -1px;
 }
