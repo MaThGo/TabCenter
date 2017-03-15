@@ -89,6 +89,9 @@ VerticalTabs.prototype = {
     let mainWindow = document.getElementById('main-window');
     let tabs = document.getElementById('tabbrowser-tabs');
 
+    mainWindow.setAttribute('showtabsright',
+         (!!prefs.showtabsright).toString())
+
     if (mainWindow.getAttribute('toggledon') === '') {
       mainWindow.setAttribute('toggledon', 'true');
     }
