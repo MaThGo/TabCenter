@@ -89,8 +89,7 @@ VerticalTabs.prototype = {
     let mainWindow = document.getElementById('main-window');
     let tabs = document.getElementById('tabbrowser-tabs');
 
-    mainWindow.setAttribute('showtabsright',
-         (!!prefs.showtabsright).toString())
+    mainWindow.setAttribute('showtabsright', (!!prefs.showtabsright).toString())
 
     if (mainWindow.getAttribute('toggledon') === '') {
       mainWindow.setAttribute('toggledon', 'true');
@@ -646,12 +645,9 @@ VerticalTabs.prototype = {
       leftbox.setAttribute('expanded', 'true');
     }
 
+    let splitterPosition = browserbox[prefs.showtabsright ? 'lastChild' : 'firstChild']
     browserbox.insertBefore(leftbox, contentbox);
-    if (!!prefs.showtabsright) {
-      browserbox.insertBefore(splitter, browserbox.lastChild);
-    } else {
-      browserbox.insertBefore(splitter, browserbox.firstChild);
-    }
+    browserbox.insertBefore(splitter, splitterPosition);
 
     this.pinnedWidth = +mainWindow.getAttribute('tabspinnedwidth').replace('px', '') ||
                        +window.getComputedStyle(document.documentElement)
@@ -666,12 +662,19 @@ VerticalTabs.prototype = {
         this.pinnedWidth = document.width / 2;
       }
       let initialX = event.screenX - this.pinnedWidth;
+
       let mousemove = (event) => {
         let xDelta = event.screenX - initialX;
-        this.pinnedWidth = Math.min(xDelta, document.width / 2);
+
+        if (prefs.showtabsright) {
+          xDelta = document.width - event.screenX;
+        }
+
+        this.pinnedWidth = Math.min(xDelta, document.width / 2)
         if (this.pinnedWidth < 30) {
           this.pinnedWidth = 30;
         }
+
         document.documentElement.style.setProperty('--pinned-width', `${this.pinnedWidth}px`);
         mainWindow.setAttribute('tabspinnedwidth', `${this.pinnedWidth}px`);
         ss.setWindowValue(window, 'TCtabspinnedwidth', mainWindow.getAttribute('tabspinnedwidth'));
