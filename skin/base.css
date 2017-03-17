@@ -915,7 +915,7 @@
 }
 
 /* Display on the right side */
-#main-window[showtabsright] #verticaltabs-box {
+#main-window[showtabsright="true"] #verticaltabs-box {
   left: unset;
   right: 0;
 }
