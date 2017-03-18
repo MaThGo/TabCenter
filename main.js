@@ -355,9 +355,17 @@ function largeTabsChange() {
   }
 }
 
+function showTabsRightChange() {
+  for (let window of browserWindows) {
+    let mainWindow = viewFor(window).document.getElementById('main-window');
+    mainWindow.setAttribute('showtabsright', !!prefs.prefs.showtabsright);
+  }
+}
+
 exports.main = function (options, callbacks) {
   // Listen for preference changes
   prefs.on('largetabs', largeTabsChange);
+  prefs.on('showtabsright', showTabsRightChange);
 
   // Register the resource:// alias.
   mount(RESOURCE_HOST, prefixURI);
