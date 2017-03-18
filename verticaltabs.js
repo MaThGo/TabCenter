@@ -40,7 +40,8 @@
 
 const {Cc, Ci, Cu} = require('chrome');
 const {platform} = require('sdk/system');
-const {prefs} = require('sdk/simple-prefs');
+const gprefs = require('sdk/simple-prefs');
+const prefs = gprefs.prefs
 const {get, set} = require('sdk/preferences/service');
 
 const {sendPing, setDefaultPrefs, removeStylesheets, installStylesheets} = require('./utils');
@@ -88,6 +89,10 @@ VerticalTabs.prototype = {
     this.mouseInside = false;
     let mainWindow = document.getElementById('main-window');
     let tabs = document.getElementById('tabbrowser-tabs');
+
+    gprefs.on('showtabsright', () => {
+      this.rearrangeSplitter();
+    });
 
     mainWindow.setAttribute('showtabsright', (!!prefs.showtabsright).toString())
 
@@ -531,6 +536,33 @@ VerticalTabs.prototype = {
     });
   },
 
+  /**
+   * This will remove the splitter and insert it again to reposition it
+   * in a case of change on the `showtabsright` pref.
+   */
+  rearrangeSplitter: function () {
+    const splitter = this.document.getElementById('verticaltabs-splitter')
+    if (!splitter) {
+      return;
+    }
+    splitter.parentNode.removeChild(splitter);
+    this.injectSplitter(this.document.getElementById('browser'), splitter);
+  },
+
+  /**
+   * Inject the splitter
+   *
+   * The splitter position is dependent on the `showtabsright` pref.
+   *
+   * @param {} browser  - The #browser element of the window the splitter
+   *                      belongs to.
+   * @param {} splitter - The splitter element to insert.
+   */
+  injectSplitter: function (browser, splitter) {
+    let splitterPosition = browser[prefs.showtabsright ? 'lastChild' : 'firstChild']
+    browser.insertBefore(splitter, splitterPosition);
+  },
+
   rearrangeXUL: function () {
     const window = this.window;
     const document = this.document;
@@ -645,9 +677,8 @@ VerticalTabs.prototype = {
       leftbox.setAttribute('expanded', 'true');
     }
 
-    let splitterPosition = browserbox[prefs.showtabsright ? 'lastChild' : 'firstChild']
     browserbox.insertBefore(leftbox, contentbox);
-    browserbox.insertBefore(splitter, splitterPosition);
+    this.injectSplitter(browserbox, splitter)
 
     this.pinnedWidth = +mainWindow.getAttribute('tabspinnedwidth').replace('px', '') ||
                        +window.getComputedStyle(document.documentElement)
