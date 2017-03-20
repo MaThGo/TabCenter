@@ -918,6 +918,8 @@
 #main-window[showtabsright="true"] #verticaltabs-box {
   left: unset;
   right: 0;
+  border-right: unset;
+  border-left: 1px solid hsla(0, 0%, 0%, 0.2) !important;
 }
 
 /* Here we just inverse the margins, repositioning happens in verticaltab.js
