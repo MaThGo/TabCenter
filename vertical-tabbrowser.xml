@@ -748,14 +748,6 @@
                        validate="never"
                        role="presentation"/>
           </xul:vbox>
-          <xul:stack>
-            <xul:toolbarbutton anonid="close-button"
-                               xbl:inherits="fadein,pinned,selected,visuallyselected"
-                               class="tab-close-button close-icon"/>
-            <xul:vbox xbl:inherits="pinned"
-                      class="pinned-icon"
-                      role="presentation"/>
-          </xul:stack>
           <xul:image xbl:inherits="sharing,selected"
                      anonid="sharing-icon"
                      class="tab-sharing-icon-overlay"
@@ -777,6 +769,14 @@
                      anonid="soundplaying-icon"
                      class="tab-icon-sound"
                      role="presentation"/>
+          <xul:stack>
+            <xul:toolbarbutton anonid="close-button"
+                               xbl:inherits="fadein,pinned,selected,visuallyselected"
+                               class="tab-close-button close-icon"/>
+            <xul:vbox xbl:inherits="pinned"
+                      class="pinned-icon"
+                      role="presentation"/>
+          </xul:stack>
         </xul:hbox>
       </xul:stack>
     </content>

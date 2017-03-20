@@ -940,3 +940,28 @@
 #main-window[showtabsright="true"][inDOMFullscreen][inFullscreen] #appcontent {
   margin-right: 0;
 }
+
+/* Reverse Toolbar */
+#main-window[showtabsright="true"] #TabsToolbar {
+  flex-direction: row-reverse;
+}
+
+#main-window[showtabsright="true"] #TabsToolbar > #top-tabs-button {
+  margin-right: 4px;
+  margin-left: 0;
+}
+
+#main-window[showtabsright="true"] #TabsToolbar > #pin-button {
+  margin: 0 4px 0 8px !important;
+}
+
+/* Reverse Tab content */
+#main-window[showtabsright="true"] .tabbrowser-tab {
+  direction: rtl;
+}
+
+#main-window[showtabsright="true"] .tabbrowser-tab html|canvas {
+  left: unset;
+  right: 12px;
+}
+
