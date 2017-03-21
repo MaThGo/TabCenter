@@ -936,3 +936,7 @@
 #main-window[showtabsright="true"] #verticaltabs-box ~ #appcontent {
   margin-left: -1px;
 }
+
+#main-window[showtabsright="true"][inDOMFullscreen][inFullscreen] #appcontent {
+  margin-right: 0;
+}
