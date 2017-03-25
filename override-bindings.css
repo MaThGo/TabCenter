@@ -9,3 +9,7 @@
 .tabbrowser-tabs[vertical="true"] .tabbrowser-tab {
   -moz-binding: url("chrome://tabcenter/content/vertical-tabbrowser.xml#tabbrowser-tab") !important;
 }
+
+#main-window[showtabsright="true"] .tabbrowser-tabs[vertical="true"] .tabbrowser-tab {
+  -moz-binding: url("chrome://tabcenter/content/vertical-tabbrowser.xml#tabbrowser-tab-on-right") !important;
+}

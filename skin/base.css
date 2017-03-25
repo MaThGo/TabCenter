@@ -940,3 +940,16 @@
 #main-window[showtabsright="true"][inDOMFullscreen][inFullscreen] #appcontent {
   margin-right: 0;
 }
+
+#main-window[showtabsright="true"] #TabsToolbar {
+  flex-direction: row-reverse;
+}
+
+#main-window[showtabsright="true"] #verticaltabs-box .title-wrapper {
+  text-align: right;
+}
+
+#main-window[showtabsright="true"] #verticaltabs-box .tabbrowser-tabs.large-tabs html|canvas {
+  left: unset;
+  right: 12px;
+}
